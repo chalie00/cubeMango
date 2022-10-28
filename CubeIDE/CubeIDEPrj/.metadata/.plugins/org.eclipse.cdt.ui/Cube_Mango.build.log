@@ -1,0 +1,10 @@
+18:14:27 **** Incremental Build of configuration Debug for project Cube_Mango ****
+make -j6 all 
+arm-none-eabi-size   Cube_Mango.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8388	     20	   1660	  10068	   2754	Cube_Mango.elf
+Finished building: default.size.stdout
+ 
+
+18:14:28 Build Finished. 0 errors, 0 warnings. (took 629ms)
+
