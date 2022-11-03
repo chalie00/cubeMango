@@ -60,8 +60,8 @@ all: main-build
 main-build: Cube_Mango.elf secondary-outputs
 
 # Tool invocations
-Cube_Mango.elf Cube_Mango.map: $(OBJS) $(USER_OBJS) C:\00Cube\CubeIDE\CubeIDEPrj\Cube_Mango\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Cube_Mango.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\00Cube\CubeIDE\CubeIDEPrj\Cube_Mango\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Cube_Mango.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Cube_Mango.elf Cube_Mango.map: $(OBJS) $(USER_OBJS) C:\00Mango_Cube\cubeMango\CubeIDE\CubeIDEPrj\Cube_Mango\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Cube_Mango.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\00Mango_Cube\cubeMango\CubeIDE\CubeIDEPrj\Cube_Mango\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Cube_Mango.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

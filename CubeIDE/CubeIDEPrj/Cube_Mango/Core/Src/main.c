@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "rtc.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -88,6 +89,7 @@ int main(void)
   MX_GPIO_Init();
   MX_RTC_Init();
   MX_USART3_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -99,10 +101,32 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5| GPIO_PIN_8| GPIO_PIN_9, GPIO_PIN_SET);
 	
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5|GPIO_PIN_8|GPIO_PIN_9);
-	HAL_Delay(1000);
-	
+	if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) != 0) {
+		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == 0) {
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
+		}
+		
+	} else {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) != 0) {
+		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 0) {
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);
+		}
+	} else {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+	}
+
+	if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) != 0) {
+		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) != 0) {
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
+		}
+	} else {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+	}
   }
   /* USER CODE END 3 */
 }
@@ -127,7 +151,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
